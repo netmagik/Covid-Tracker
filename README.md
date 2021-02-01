@@ -1,8 +1,11 @@
 # Covid-19 Tracker
 --- 
+### [Live Demo](https://netmagik.github.io/Covid-Tracker/)
+
+--- 
 
 #### API used: https://covid19.mathdro.id/api
-####[Based on Excellent Tutorial by JS Mastery](https://www.youtube.com/watch?v=khJlrj3Y6Ls)
+#### [Based on Excellent Tutorial by JS Mastery](https://www.youtube.com/watch?v=khJlrj3Y6Ls)
 
 This project includes: 
 - React Hooks
