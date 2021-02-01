@@ -10,3 +10,5 @@ This project includes:
 - Chart JS
 - Count Up
 - Classnames
+--- 
+![Corona-Virus-Tracker](https://user-images.githubusercontent.com/3833560/106532109-8fdaa680-64bd-11eb-8420-48dd67a432f8.png)
