@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TableSortLabel, IconButton} from '@material-ui/core';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TableSortLabel} from '@material-ui/core';
 import { fetchStates } from '../../api/';
 import styles from './States.module.css';
 
@@ -18,10 +18,8 @@ const State = (state) => {
     }, [state])
 
     // STYLES
-    const StyledTableCell = withStyles((theme) => ({
+    const StyledTableCell = withStyles(() => ({
         head: {
-        //   backgroundColor: theme.palette.common.black,
-        //   color: theme.palette.common.white,
           fontWeight: 700,
           textTransform: 'uppercase',
           letterSpacing: 1,
@@ -41,14 +39,18 @@ const State = (state) => {
         },
       }))(TableRow);
 
-      const useStyles = makeStyles({
+      const useStyles = makeStyles((theme) => ({
+        paper: {
+            width: '100%',
+            marginBottom: theme.spacing(4),
+          },
         table: {
           minWidth: 100,
         },
         container: {
             maxHeight: 440,
           },
-      });
+      }));
 
       // Format Numbers with commas
       function formatNumber(num) {
@@ -125,6 +127,13 @@ const State = (state) => {
     );
     }
 
+    EnhancedTableHead.propTypes = {
+        classes: PropTypes.object.isRequired,
+        onRequestSort: PropTypes.func.isRequired,
+        order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+        orderBy: PropTypes.string.isRequired,
+      };
+
         const [order, setOrder] = useState('asc');
         const [orderBy, setOrderBy] = useState('state');
 
@@ -137,11 +146,12 @@ const State = (state) => {
         const classes = useStyles();
 
         return (
-            <div>
+            <div className={styles.container}>
                  {stateData.length > 1 ? (
                 <div>
                 <h1>State Data</h1>
-                <TableContainer className={classes.container} component={Paper}>
+                <Paper className={classes.paper} elevation={3}>
+                <TableContainer className={classes.container}>
                     <Table className={classes.table} stickyHeader aria-label="sticky table">
                         <EnhancedTableHead 
                             order={order}
@@ -171,6 +181,7 @@ const State = (state) => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                </Paper>
             </div>
                   ) : <h1>State Data Not Available</h1>}
             </div>
