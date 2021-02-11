@@ -128,7 +128,6 @@ const State = (state) => {
     }
 
     EnhancedTableHead.propTypes = {
-        classes: PropTypes.object.isRequired,
         onRequestSort: PropTypes.func.isRequired,
         order: PropTypes.oneOf(['asc', 'desc']).isRequired,
         orderBy: PropTypes.string.isRequired,
@@ -149,7 +148,7 @@ const State = (state) => {
             <div className={styles.container}>
                  {stateData.length > 1 ? (
                 <div>
-                <h1>State Data</h1>
+                <h1>United States</h1>
                 <Paper className={classes.paper} elevation={3}>
                 <TableContainer className={classes.container}>
                     <Table className={classes.table} stickyHeader aria-label="sticky table">
