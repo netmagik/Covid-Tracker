@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TableSortLabel} from '@material-ui/core';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TableSortLabel, Grid } from '@material-ui/core';
 import { fetchStates } from '../../api/';
 import styles from './States.module.css';
 
 const State = (state) => {
 
     const [stateData, setStateData] = useState([]);
+    const [order, setOrder] = useState('asc');
+    const [orderBy, setOrderBy] = useState('state');
 
     // Get DATA from the API
     useEffect(() => {
@@ -20,10 +22,9 @@ const State = (state) => {
     // STYLES
     const StyledTableCell = withStyles(() => ({
         head: {
-          fontWeight: 700,
+          fontWeight: 'bold',
           textTransform: 'uppercase',
-          letterSpacing: 1,
-          fontSize: '1.3rem'
+          fontSize: '1rem'
         },
         body: {
           fontSize: 18,
@@ -38,19 +39,6 @@ const State = (state) => {
           },
         },
       }))(TableRow);
-
-      const useStyles = makeStyles((theme) => ({
-        paper: {
-            width: '100%',
-            marginBottom: theme.spacing(4),
-          },
-        table: {
-          minWidth: 100,
-        },
-        container: {
-            maxHeight: 440,
-          },
-      }));
 
       // Format Numbers with commas
       function formatNumber(num) {
@@ -99,7 +87,7 @@ const State = (state) => {
         };        
 
     return (
-                    <TableHead>
+                    <TableHead className={styles.head}>
                         <TableRow>
                         {headCells.map(headCell => (
                            <StyledTableCell
@@ -133,56 +121,57 @@ const State = (state) => {
         orderBy: PropTypes.string.isRequired,
       };
 
-        const [order, setOrder] = useState('asc');
-        const [orderBy, setOrderBy] = useState('state');
+    const tableBody = (
+    <TableBody>
+        {stableSort(stateData, getComparator(order, orderBy))
+            .map((data) => {
+                return (
+                    <StyledTableRow key={data.state}>
+                    <StyledTableCell width='100' component="th" scope="row">
+                        {data.state}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" width='50' style={{ color: 'rgba(0, 139, 139, 0.8)' }}>
+                        {formatNumber(data.positive)}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" width='50' style={{ color: 'rgba(255, 0, 0, 0.8)' }}>
+                        {formatNumber(data.death)}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" width='50' style={{ color: 'rgba(139, 139, 255, 0.9)' }}>
+                        {data.hospitalized > 0 ? formatNumber(data.hospitalized) : 0}
+                    </StyledTableCell>
+                </StyledTableRow>
+                )
+            })}
+    </TableBody>
+    )
 
         const handleRequestSort = (event, property) => {
             const isAsc = orderBy === property && order === 'asc';
             setOrder(isAsc ? 'desc' : 'asc');
             setOrderBy(property);
           };
-        
-        const classes = useStyles();
 
         return (
             <div className={styles.container}>
+                <Grid item xs={12}>
                  {stateData.length > 1 ? (
                 <div>
                 <h1>United States</h1>
-                <Paper className={classes.paper} elevation={3}>
-                <TableContainer className={classes.container}>
-                    <Table className={classes.table} stickyHeader aria-label="sticky table">
+                <Paper className={styles.root} elevation={3}>
+                <TableContainer className={styles.table}>
+                    <Table stickyHeader aria-label="sticky table">
                         <EnhancedTableHead 
                             order={order}
                             orderBy={orderBy}
                             onRequestSort={handleRequestSort}
                         />
-                        <TableBody>
-                            {stableSort(stateData, getComparator(order, orderBy))
-                                .map((data) => {
-                                    return (
-                                        <StyledTableRow key={data.state}>
-                                        <StyledTableCell width='100' component="th" scope="row">
-                                            {data.state}
-                                        </StyledTableCell>
-                                        <StyledTableCell align="left" width='50' style={{ color: 'rgba(0, 139, 139, 0.8)' }}>
-                                            {formatNumber(data.positive)}
-                                        </StyledTableCell>
-                                        <StyledTableCell align="left" width='50' style={{ color: 'rgba(255, 0, 0, 0.8)' }}>
-                                            {formatNumber(data.death)}
-                                        </StyledTableCell>
-                                        <StyledTableCell align="left" width='50' style={{ color: 'rgba(139, 139, 255, 0.9)' }}>
-                                            {data.hospitalized > 0 ? formatNumber(data.hospitalized) : 0}
-                                        </StyledTableCell>
-                                    </StyledTableRow>
-                                    )
-                                })}
-                        </TableBody>
+                       {tableBody}
                     </Table>
                 </TableContainer>
                 </Paper>
             </div>
                   ) : <h1>State Data Not Available</h1>}
+            </Grid>
             </div>
         )
     }
