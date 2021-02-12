@@ -3,6 +3,7 @@ import {Cards, Chart, CountryPicker, States, Countries} from './components';
 import styles from './App.module.css';
 import {fetchData} from './api';
 import coronaImage from './images/image.png';
+import Footer from './components/Footer/Footer';
 
 class App extends React.Component {
 
@@ -36,6 +37,7 @@ class App extends React.Component {
                 <States />
                 <CountryPicker handleCountryChange={this.handleCountryChange}/>
                 <Chart data={data} country={country} />
+                <Footer />
             </div>
         )
     }
