@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TableSortLabel, Grid} from '@material-ui/core';
 import { url } from '../../api/';
+import { Flag } from 'semantic-ui-react';
 import styles from './Countries.module.css';
 
 const Countries = () => {
@@ -22,7 +23,7 @@ const Countries = () => {
             return x;
           }, {});
           const tableData = [];
-          console.log(grouped);
+          
           Object.entries(grouped).forEach((country, index) => {
             let confirmed = 0;
             let deaths = 0;
@@ -34,7 +35,7 @@ const Countries = () => {
               deaths += i.deaths;
               recovered += i.recovered;
               active += i.active;
-              tableData[index].iso3 = i.iso3;
+              tableData[index].iso2 = i.iso2;
               tableData[index].confirmed = confirmed;
               tableData[index].deaths = deaths;
               tableData[index].recovered = recovered;
@@ -45,7 +46,6 @@ const Countries = () => {
           setCountryData(tableData);
         }
         fetchStats();
-        console.log(countryData);
       }, []);
       if (!countryData) return <p>loading...</p>
 
@@ -159,7 +159,7 @@ const Countries = () => {
                 return (
                     <StyledTableRow key={data.country}>
                     <StyledTableCell width='100' component="th" scope="row" style={{ fontWeight: 'bold' }}>
-                        {data.country}
+                    <Flag name={data.country.toLowerCase()} />  {data.country}
                     </StyledTableCell>
                     <StyledTableCell align="left" width='50' style={{ color: 'rgba(0, 139, 139, 0.8)' }}>
                         {formatNumber(data.confirmed)}
