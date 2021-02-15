@@ -1,7 +1,7 @@
 # Covid-19 Tracker
 --- 
 ### [Live Demo](https://netmagik.github.io/Covid-Tracker):
-####https://netmagik.github.io/Covid-Tracker
+#### https://netmagik.github.io/Covid-Tracker
 
 - Search Covid Cases by Country, Search US Cases by State
 - Sort data by Country or State
