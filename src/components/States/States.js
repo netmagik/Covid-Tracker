@@ -28,7 +28,7 @@ const State = (state) => {
         },
         body: {
           fontSize: 18,
-          fontWeight: 700
+          fontWeight: 'bold'
         },
       }))(TableCell);
 
@@ -132,12 +132,15 @@ const State = (state) => {
                     </StyledTableCell>
                     <StyledTableCell align="left" width='50' style={{ color: 'rgba(0, 139, 139, 0.8)' }}>
                         {formatNumber(data.positive)}
+                        <p className={styles.count}>confirmed</p>
                     </StyledTableCell>
                     <StyledTableCell align="left" width='50' style={{ color: 'rgba(255, 0, 0, 0.8)' }}>
                         {formatNumber(data.death)}
+                        <p className={styles.count}>deaths</p>
                     </StyledTableCell>
                     <StyledTableCell align="left" width='50' style={{ color: 'rgba(139, 139, 255, 0.9)' }}>
                         {data.hospitalized > 0 ? formatNumber(data.hospitalized) : 0}
+                        <p className={styles.count}>hospitalized</p>
                     </StyledTableCell>
                 </StyledTableRow>
                 )

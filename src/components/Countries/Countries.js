@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 import { withStyles } from '@material-ui/core/styles';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TableSortLabel, Grid} from '@material-ui/core';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TableSortLabel, Grid, TextField} from '@material-ui/core';
 import { url } from '../../api/';
 import { Flag } from 'semantic-ui-react';
 import styles from './Countries.module.css';
@@ -10,7 +10,8 @@ const Countries = () => {
 
     const [countryData, setCountryData] = useState([]);
     const [order, setOrder] = useState('asc');
-    const [orderBy, setOrderBy] = useState('country');
+    const [orderBy, setOrderBy] = useState('confirmed');
+    const [updatedData, setUpdatedData] = useState([]);
 
     useEffect(() => {
         const fetchStats = async () => {
@@ -44,9 +45,11 @@ const Countries = () => {
             })
           })
           setCountryData(tableData);
+          setUpdatedData(tableData);
         }
         fetchStats();
       }, []);
+
       if (!countryData) return <p>loading...</p>
 
 
@@ -59,7 +62,7 @@ const Countries = () => {
         },
         body: {
           fontSize: 18,
-          fontWeight: 700
+          fontWeight: 'bold',
         },
       }))(TableCell);
 
@@ -88,7 +91,7 @@ const Countries = () => {
       }
       
       function getComparator(order, orderBy) {
-        return order === 'desc'
+        return order === 'asc'
           ? (a, b) => descendingComparator(a, b, orderBy)
           : (a, b) => -descendingComparator(a, b, orderBy);
       }
@@ -154,7 +157,7 @@ const Countries = () => {
 
     const tableBody = (
         <TableBody>
-        {stableSort(countryData, getComparator(order, orderBy))
+        {stableSort(updatedData, getComparator(order, orderBy))
             .map((data) => {
                 return (
                     <StyledTableRow key={data.country}>
@@ -163,12 +166,15 @@ const Countries = () => {
                     </StyledTableCell>
                     <StyledTableCell align="left" width='50' style={{ color: 'rgba(0, 139, 139, 0.8)' }}>
                         {formatNumber(data.confirmed)}
+                        <p className={styles.count}>confirmed</p>
                     </StyledTableCell>
                     <StyledTableCell align="left" width='50' style={{ color: 'rgba(255, 0, 0, 0.8)' }}>
                         {formatNumber(data.deaths)}
+                        <p className={styles.count}>deaths</p>
                     </StyledTableCell>
                     <StyledTableCell align="left" width='50' style={{ color: 'rgba(139, 139, 255, 0.9)' }}>
                         {data.recovered > 0 ? formatNumber(data.recovered) : 0}
+                        <p className={styles.count}>recovered</p>
                     </StyledTableCell>
                 </StyledTableRow>
                 )
@@ -182,28 +188,48 @@ const Countries = () => {
             setOrderBy(property);
           };
 
+        const filterByCountry = (e) => {
+          const newData = countryData.slice();
+          setUpdatedData(
+            newData.filter(({country}) => 
+              country.toLowerCase().includes(e.toLowerCase().trim()))
+            )
+          console.log(updatedData);
+        }
+
         return (
             <div className={styles.container}>
-                <Grid item xs={12}>
-                 {countryData.length > 1 ? (
-                <div>
-                <h1>World Data</h1>
-                <Paper className={styles.root} elevation={3}>
-                <TableContainer className={styles.table} >
-                    <Table stickyHeader aria-label="sticky table">
-                        <EnhancedTableHead
-                            order={order}
-                            orderBy={orderBy}
-                            onRequestSort={handleRequestSort}
+                {countryData.length > 1 ? (
+                  <Grid container spacing={3}>
+                      <Grid item xs={6}>
+                        <h1 className={styles.title}>All Countries</h1>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <TextField
+                          variant="outlined"
+                          label="Search By Country"
+                          onChange={(e) => {
+                          filterByCountry(e.target.value);
+                          }}
                         />
-                  {tableBody}
-                    </Table>
-                </TableContainer>
-                </Paper>
-            </div>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Paper className={styles.root} elevation={3}>
+                          <TableContainer className={styles.table} >
+                            <Table stickyHeader aria-label="sticky table">
+                              <EnhancedTableHead
+                                order={order}
+                                orderBy={orderBy}
+                                onRequestSort={handleRequestSort}
+                              />
+                              {tableBody}
+                            </Table>
+                          </TableContainer>
+                        </Paper>
+                      </Grid>
+                    </Grid>
                   ) : <h1>Data Not Available</h1>}
-            </Grid>
-            </div>
+              </div>
         )
     }
 
