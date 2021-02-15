@@ -8,6 +8,11 @@ h1 {
     text-align: center;
 }
 
+.title {
+    text-align: right;
+    padding-top: 10px;
+}
+
 .count {
     text-transform: uppercase;
     color: #757575;

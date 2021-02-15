@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 import { withStyles } from '@material-ui/core/styles';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TableSortLabel, Grid } from '@material-ui/core';
+import { TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TableSortLabel, Grid } from '@material-ui/core';
 import { fetchStates } from '../../api/';
 import styles from './States.module.css';
 
@@ -9,12 +9,15 @@ const State = (state) => {
 
     const [stateData, setStateData] = useState([]);
     const [order, setOrder] = useState('asc');
-    const [orderBy, setOrderBy] = useState('state');
+    const [orderBy, setOrderBy] = useState('positive');
+    const [updatedData, setUpdatedData] = useState([]);
 
     // Get DATA from the API
     useEffect(() => {
         const fetchAPI = async () => {
-            setStateData(await fetchStates(state));
+          const data = await fetchStates(state);
+            setStateData(data);
+            setUpdatedData(data);
         }
         fetchAPI();
     }, [state])
@@ -57,7 +60,7 @@ const State = (state) => {
       }
       
       function getComparator(order, orderBy) {
-        return order === 'desc'
+        return order === 'asc'
           ? (a, b) => descendingComparator(a, b, orderBy)
           : (a, b) => -descendingComparator(a, b, orderBy);
       }
@@ -123,7 +126,7 @@ const State = (state) => {
 
     const tableBody = (
     <TableBody>
-        {stableSort(stateData, getComparator(order, orderBy))
+        {stableSort(updatedData, getComparator(order, orderBy))
             .map((data) => {
                 return (
                     <StyledTableRow key={data.state}>
@@ -154,15 +157,35 @@ const State = (state) => {
             setOrderBy(property);
           };
 
+        const filterByState = (e) => {
+          const newData = stateData.slice();
+            setUpdatedData(
+              newData.filter(({state}) => 
+                state.toLowerCase().includes(e.toLowerCase().trim()))
+              )
+              console.log(updatedData)
+          }
+
         return (
             <div className={styles.container}>
-                <Grid item xs={12}>
-                 {stateData.length > 1 ? (
-                <div>
-                <h1>United States</h1>
-                <Paper className={styles.root} elevation={3}>
-                <TableContainer className={styles.table}>
-                    <Table stickyHeader aria-label="sticky table">
+              {stateData.length > 1 ? (
+                <Grid container spacing={3}>
+                  <Grid item xs={6}>
+                    <h1 className={styles.title}>United States</h1>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                          variant="outlined"
+                          label="Search By State"
+                          onChange={(e) => {
+                          filterByState(e.target.value);
+                          }}
+                        />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Paper className={styles.root} elevation={3}>
+                    <TableContainer className={styles.table}>
+                      <Table stickyHeader aria-label="sticky table">
                         <EnhancedTableHead 
                             order={order}
                             orderBy={orderBy}
@@ -170,11 +193,11 @@ const State = (state) => {
                         />
                        {tableBody}
                     </Table>
-                </TableContainer>
-                </Paper>
-            </div>
+                    </TableContainer>
+                    </Paper>
+                  </Grid>
+                </Grid>
                   ) : <h1>State Data Not Available</h1>}
-            </Grid>
             </div>
         )
     }

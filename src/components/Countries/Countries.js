@@ -194,7 +194,6 @@ const Countries = () => {
             newData.filter(({country}) => 
               country.toLowerCase().includes(e.toLowerCase().trim()))
             )
-          console.log(updatedData);
         }
 
         return (
