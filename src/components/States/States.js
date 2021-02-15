@@ -161,8 +161,9 @@ const State = (state) => {
           const newData = stateData.slice();
             setUpdatedData(
               newData.filter(({state}) => 
-                state.toLowerCase().includes(e.toLowerCase().trim()))
-              )
+                // convertState(state.toLowerCase().includes(e.toLowerCase().trim())))
+               state.toUpperCase().includes(e.toUpperCase().trim())
+              ))
               console.log(updatedData)
           }
 
@@ -177,6 +178,7 @@ const State = (state) => {
                     <TextField
                           variant="outlined"
                           label="Search By State"
+                          inputProps={{ maxLength: 2 }}
                           onChange={(e) => {
                           filterByState(e.target.value);
                           }}
