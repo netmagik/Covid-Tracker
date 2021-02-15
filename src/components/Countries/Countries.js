@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withStyles } from '@material-ui/core/styles';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TableSortLabel, Grid, TextField} from '@material-ui/core';
 import { url } from '../../api/';
-import { Flag } from 'semantic-ui-react';
+import { Flag, Loader } from 'semantic-ui-react';
 import styles from './Countries.module.css';
 
 const Countries = () => {
@@ -50,7 +50,8 @@ const Countries = () => {
         fetchStats();
       }, []);
 
-      if (!countryData) return <p>loading...</p>
+      if (!countryData) return  
+          <Loader active inline="centered">Loading...</Loader>
 
 
     // STYLES
@@ -227,7 +228,9 @@ const Countries = () => {
                         </Paper>
                       </Grid>
                     </Grid>
-                  ) : <h1>Data Not Available</h1>}
+                  ) : 
+                  <Loader active inline="centered">Loading...</Loader>
+                }
               </div>
         )
     }
