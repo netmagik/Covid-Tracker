@@ -56,6 +56,9 @@ const Countries = () => {
 
     // STYLES
     const StyledTableCell = withStyles(() => ({
+        root: {
+          padding: '10px'
+        },
         head: {
           fontWeight: 'bold',
           textTransform: 'uppercase',
@@ -72,6 +75,7 @@ const Countries = () => {
           '&:nth-of-type(odd)': {
             backgroundColor: theme.palette.action.hover,
           },
+          padding: '0'
         },
       }))(TableRow);
 

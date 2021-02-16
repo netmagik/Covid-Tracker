@@ -24,6 +24,10 @@ const State = (state) => {
 
     // STYLES
     const StyledTableCell = withStyles(() => ({
+      root: {
+        padding: '10px'
+
+      },
         head: {
           fontWeight: 'bold',
           textTransform: 'uppercase',
@@ -40,6 +44,7 @@ const State = (state) => {
           '&:nth-of-type(odd)': {
             backgroundColor: theme.palette.action.hover,
           },
+          padding: '0'
         },
       }))(TableRow);
 
@@ -164,7 +169,6 @@ const State = (state) => {
                 // convertState(state.toLowerCase().includes(e.toLowerCase().trim())))
                state.toUpperCase().includes(e.toUpperCase().trim())
               ))
-              console.log(updatedData)
           }
 
         return (
