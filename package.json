@@ -42,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-anchor-link-smooth-scroll": "^1.0.12"
   }
 }

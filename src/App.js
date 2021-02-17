@@ -1,9 +1,9 @@
 import React from 'react';
-import {Cards, Chart, CountryPicker, States, Countries} from './components';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
+import { Cards, Chart, CountryPicker, States, Countries, Footer } from './components';
 import styles from './App.module.css';
 import {fetchData} from './api';
-import coronaImage from './images/image.png';
-import Footer from './components/Footer/Footer';
+import coronaImage from './images/covid.png';
 
 class App extends React.Component {
 
@@ -31,11 +31,24 @@ class App extends React.Component {
 
         return (
             <div className={styles.container}>
-                <img className={styles.image} alt="Covid-19" src={coronaImage} />
+                <div className={styles.header}>
+                    <div className={styles.logo}>
+                        <img className={styles.image} alt="Covid-19" src={coronaImage} />
+                        <h4>COVID-19 TRACKER</h4>
+                    </div>
+  
+                    <div className={styles.nav}>
+                        <AnchorLink href='#countries'>All Countries</AnchorLink>
+                        <AnchorLink href='#states'>United States</AnchorLink>
+                        <AnchorLink href='#chart'>Daily Data</AnchorLink>
+                    </div>
+                
+                </div>
+
                 <Cards data={data}/>
-                <Countries />
-                <States />
-                <CountryPicker handleCountryChange={this.handleCountryChange}/>
+                <section id="countries"><Countries /></section>
+                <section id="states"><States /></section>
+                <section id="chart"><CountryPicker handleCountryChange={this.handleCountryChange}/></section>
                 <Chart data={data} country={country} />
                 <Footer />
             </div>
