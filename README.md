@@ -23,10 +23,11 @@ This project includes:
 - Classnames
 - Semantic UI
 --- 
-![All Countries](https://user-images.githubusercontent.com/3833560/107997110-02647f80-6fb0-11eb-8d68-02a77045cb4a.png)
+![All Countries](https://user-images.githubusercontent.com/3833560/108412334-bdcb2500-71f7-11eb-9499-fbe57a369b45.png)
+)
 
 ---
-![United States](https://user-images.githubusercontent.com/3833560/107997575-10ff6680-6fb1-11eb-903b-b9e2f64a6282.png)
+![United States](https://user-images.githubusercontent.com/3833560/108412398-d2a7b880-71f7-11eb-8dfc-088ad550496f.png)
 
 ---
 ![Search by State](https://user-images.githubusercontent.com/3833560/107997640-37bd9d00-6fb1-11eb-84b1-6ec88803566a.png)
