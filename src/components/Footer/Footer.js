@@ -18,8 +18,8 @@ const Footer = () => {
           </Link>
           . <br />
           {"Site Source "}
-          <Link href="https://netmagik.github.io/Covid-Tracker/">
-          https://netmagik.github.io/Covid-Tracker/
+          <Link href="https://github.com/netmagik/Covid-Tracker">
+          https://github.com/netmagik/Covid-Tracker
           </Link>
           .
         </Typography>
