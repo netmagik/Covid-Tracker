@@ -166,18 +166,18 @@ const Countries = () => {
             .map((data) => {
                 return (
                     <StyledTableRow key={data.country}>
-                    <StyledTableCell width='100' component="th" scope="row" style={{ fontWeight: 'bold' }}>
+                    <StyledTableCell width='50' component="th" scope="row" style={{ fontWeight: 'bold' }}>
                     <Flag name={data.country.toLowerCase()} />  {data.country}
                     </StyledTableCell>
-                    <StyledTableCell align="left" width='50' style={{ color: 'rgba(0, 139, 139, 0.8)' }}>
+                    <StyledTableCell align="left" width='20' style={{ color: 'rgba(0, 139, 139, 0.8)' }}>
                         {formatNumber(data.confirmed)}
                         <p className={styles.count}>confirmed</p>
                     </StyledTableCell>
-                    <StyledTableCell align="left" width='50' style={{ color: 'rgba(255, 0, 0, 0.8)' }}>
+                    <StyledTableCell align="left" width='20' style={{ color: 'rgba(255, 0, 0, 0.8)' }}>
                         {formatNumber(data.deaths)}
                         <p className={styles.count}>deaths</p>
                     </StyledTableCell>
-                    <StyledTableCell align="left" width='50' style={{ color: 'rgba(139, 139, 255, 0.9)' }}>
+                    <StyledTableCell align="left" width='20' style={{ color: 'rgba(139, 139, 255, 0.9)' }}>
                         {data.recovered > 0 ? formatNumber(data.recovered) : 0}
                         <p className={styles.count}>recovered</p>
                     </StyledTableCell>

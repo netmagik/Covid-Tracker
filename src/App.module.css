@@ -3,7 +3,7 @@ body {
 }
 
 .container {
-    align-items: center;
+    /* align-items: center; */
     display: flex;
     justify-content: center;
     flex-direction: column;
