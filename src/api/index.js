@@ -47,12 +47,12 @@ export const fetchCountries = async () => {
 
 export const fetchStates = async () => {
     try {
-        const { data } = await axios.get('https://api.covidtracking.com/v1/states/current.json');
+        const { data } = await axios.get('https://data.cdc.gov/resource/9mfq-cb36.json');
         return data.map((stateData) => ({
             state: stateData.state, 
-            positive: stateData.positive,
-            death: stateData.death,
-            hospitalized: stateData.hospitalizedCurrently
+            positive: stateData.tot_cases,
+            death: stateData.tot_death,
+            // hospitalized: stateData.hospitalizedCurrently
          }))
     } catch (error) {
         console.log(error);

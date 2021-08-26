@@ -85,7 +85,7 @@ const State = (state) => {
         { id: "state", label: "STATE" },
         { id: "positive", numeric: true, label: "POSITIVE" },
         { id: "death", numeric: true, label: "DEATHS" },
-        { id: "hospitalized", numeric: true, label: "HOSPITALIZED" },
+        // { id: "hospitalized", numeric: true, label: "HOSPITALIZED" },
     ];
 
     function EnhancedTableHead(props) {
@@ -146,10 +146,10 @@ const State = (state) => {
                         {formatNumber(data.death)}
                         <p className={styles.count}>deaths</p>
                     </StyledTableCell>
-                    <StyledTableCell align="left" width='50' style={{ color: 'rgba(139, 139, 255, 0.9)' }}>
+                    {/* <StyledTableCell align="left" width='50' style={{ color: 'rgba(139, 139, 255, 0.9)' }}>
                         {data.hospitalized > 0 ? formatNumber(data.hospitalized) : 0}
                         <p className={styles.count}>hospitalized</p>
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                 </StyledTableRow>
                 )
             })}

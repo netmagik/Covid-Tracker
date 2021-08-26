@@ -7,13 +7,16 @@
 - Sort data by Country or State
 - Sort data by the Number of Cases
 - Sort data by the Number of Deaths
-- Sort data by the Number of Hospitalized
+- Sort data by the Number of Hospitalized (deprecated)
 - Sort data by the Number of Recovered
 - View a Line Chart of daily data in the US
 
 --- 
 
 #### API used: https://covid19.mathdro.id/api
+#### API (State Data): https://data.cdc.gov/resource/9mfq-cb36.json
+
+### NOTE: API Data keeps changing, so some features might not work the same, or have been updated from previous demo.
 
 This project includes: 
 - React Hooks
