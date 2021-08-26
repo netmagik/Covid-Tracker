@@ -134,7 +134,7 @@ const State = (state) => {
         {stableSort(updatedData, getComparator(order, orderBy))
             .map((data) => {
                 return (
-                    <StyledTableRow key={data.state}>
+                    <StyledTableRow key={Date.now()}>
                     <StyledTableCell width='100' component="th" scope="row">
                         {data.state}
                     </StyledTableCell>
@@ -162,14 +162,14 @@ const State = (state) => {
             setOrderBy(property);
           };
 
-        const filterByState = (e) => {
-          const newData = stateData.slice();
-            setUpdatedData(
-              newData.filter(({state}) => 
-                // convertState(state.toLowerCase().includes(e.toLowerCase().trim())))
-               state.toUpperCase().includes(e.toUpperCase().trim())
-              ))
-          }
+        // const filterByState = (e) => {
+        //   const newData = stateData.slice();
+        //     setUpdatedData(
+        //       newData.filter(({state}) => 
+        //         // convertState(state.toLowerCase().includes(e.toLowerCase().trim())))
+        //        state.toUpperCase().includes(e.toUpperCase().trim())
+        //       ))
+        //   }
 
         return (
             <div className={styles.container}>
@@ -179,14 +179,14 @@ const State = (state) => {
                     <h1 className={styles.title}>United States</h1>
                   </Grid>
                   <Grid item xs={6}>
-                    <TextField
+                    {/* <TextField
                           variant="outlined"
                           label="Search By State"
                           inputProps={{ maxLength: 2 }}
-                          onChange={(e) => {
-                          filterByState(e.target.value);
-                          }}
-                        />
+                          // onChange={(e) => {
+                          // // filterByState(e.target.value);
+                          // }}
+                        /> */}
                   </Grid>
                   <Grid item xs={12}>
                     <Paper className={styles.root} elevation={3}>
