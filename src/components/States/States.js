@@ -175,10 +175,10 @@ const State = (state) => {
             <div className={styles.container}>
               {stateData.length > 1 ? (
                 <Grid container spacing={3}>
-                  <Grid item xs={6}>
+                  <Grid item xs={12}>
                     <h1 className={styles.title}>United States</h1>
                   </Grid>
-                  <Grid item xs={6}>
+                 
                     {/* <TextField
                           variant="outlined"
                           label="Search By State"
@@ -187,7 +187,7 @@ const State = (state) => {
                           // // filterByState(e.target.value);
                           // }}
                         /> */}
-                  </Grid>
+                
                   <Grid item xs={12}>
                     <Paper className={styles.root} elevation={3}>
                     <TableContainer className={styles.table}>
