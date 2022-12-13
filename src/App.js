@@ -37,19 +37,19 @@ class App extends React.Component {
                         <h4>COVID-19 TRACKER</h4>
                     </div>
   
-                    <div className={styles.nav}>
+                    {/* <div className={styles.nav}>
                         <AnchorLink href='#countries'>All Countries</AnchorLink>
                         <AnchorLink href='#states'>United States</AnchorLink>
                         <AnchorLink href='#chart'>Daily Data</AnchorLink>
-                    </div>
+                    </div> */}
                 
                 </div>
 
-                <Cards data={data}/>
-                <section id="countries"><Countries /></section>
+                {/* <Cards data={data}/>
+                <section id="countries"><Countries /></section> */}
                 <section id="states"><States /></section>
-                <section id="chart"><CountryPicker handleCountryChange={this.handleCountryChange}/></section>
-                <Chart data={data} country={country} />
+                {/* <section id="chart"><CountryPicker handleCountryChange={this.handleCountryChange}/></section> */}
+                {/* <Chart data={data} country={country} /> */}
                 <Footer />
             </div>
         )
